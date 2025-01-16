@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function createThumbnail(index) {
         const img = document.createElement('img');
         const imageNumber = String(index).padStart(3, '0');  // 001, 002, ..., 066
-        img.src = `thumbnails/image${imageNumber}.jpg`;  // サムネイル画像パス
+        img.src = `images/thumbnails/image${imageNumber}.jpg`;  // サムネイル画像パス
         img.alt = `画像${imageNumber}`;  // アクセシビリティのためのalt属性
         img.dataset.fullImage = `images/image${imageNumber}.jpg`;  // フルサイズ画像パスをデータ属性に保存
         img.dataset.index = index - 1;  // 画像のインデックスを保存
@@ -34,11 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 画像をモーダルに表示する関数
     function openModal(index) {
         currentImageIndex = index;
-        modal.style.display = 'block';
-        modalImage.classList.remove('slideInFromRight', 'slideInFromLeft', 'fadeIn');  // アニメーションクラスをリセット
+        modal.style.display = 'flex';
+        modalImage.classList.remove('fadeIn', 'slideInFromRight', 'slideInFromLeft');  // アニメーションクラスをリセット
         modalImage.src = images[currentImageIndex].dataset.fullImage;  // フルサイズ画像をモーダルに表示
         modalImage.classList.add('fadeIn');
-        setTimeout(() => modalImage.classList.remove('fadeIn'), 500);
     }
 
     // モーダルを閉じる関数
@@ -49,23 +48,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // 次の画像を表示する関数
     function showNextImage() {
         const nextIndex = (currentImageIndex + 1) % totalImages;
-        modalImage.classList.remove('slideInFromRight', 'slideInFromLeft', 'fadeIn');  // アニメーションクラスをリセット
+        modalImage.classList.remove('fadeIn', 'slideInFromRight', 'slideInFromLeft');  // アニメーションクラスをリセット
+        modalImage.src = images[nextIndex].dataset.fullImage;  // 先に画像を切り替える
         modalImage.classList.add('slideInFromRight');
-        setTimeout(() => {
-            openModal(nextIndex);
-            modalImage.classList.remove('slideInFromRight');
-        }, 500);
+        currentImageIndex = nextIndex;
     }
 
     // 前の画像を表示する関数
     function showPreviousImage() {
         const prevIndex = (currentImageIndex - 1 + totalImages) % totalImages;
-        modalImage.classList.remove('slideInFromRight', 'slideInFromLeft', 'fadeIn');  // アニメーションクラスをリセット
+        modalImage.classList.remove('fadeIn', 'slideInFromRight', 'slideInFromLeft');  // アニメーションクラスをリセット
+        modalImage.src = images[prevIndex].dataset.fullImage;  // 先に画像を切り替える
         modalImage.classList.add('slideInFromLeft');
-        setTimeout(() => {
-            openModal(prevIndex);
-            modalImage.classList.remove('slideInFromLeft');
-        }, 500);
+        currentImageIndex = prevIndex;
     }
 
     // モーダルを閉じるイベントを設定
@@ -80,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // キーボードイベントで画像を切り替える
     window.addEventListener('keydown', (e) => {
-        if (modal.style.display === 'block') {
+        if (modal.style.display === 'flex') {
             switch (e.key) {
                 case 'ArrowRight':
                     showNextImage();
