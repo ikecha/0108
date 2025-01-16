@@ -47,12 +47,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 次の画像を表示する関数
     function showNextImage() {
-        openModal((currentImageIndex + 1) % totalImages);
+        const nextIndex = (currentImageIndex + 1) % totalImages;
+        modalImage.classList.add('slideInFromRight');
+        setTimeout(() => {
+            openModal(nextIndex);
+            modalImage.classList.remove('slideInFromRight');
+        }, 500);
     }
 
     // 前の画像を表示する関数
     function showPreviousImage() {
-        openModal((currentImageIndex - 1 + totalImages) % totalImages);
+        const prevIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+        modalImage.classList.add('slideInFromLeft');
+        setTimeout(() => {
+            openModal(prevIndex);
+            modalImage.classList.remove('slideInFromLeft');
+        }, 500);
     }
 
     // モーダルを閉じるイベントを設定
