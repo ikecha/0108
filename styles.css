@@ -195,7 +195,7 @@ footer a:hover {
 }
 
 .fadeIn {
-    animation: fadeIn 0.1s;
+    animation: fadeIn 0.0s;
 }
 @keyframes zoomIn {
     from { transform: scale(0.5); }
