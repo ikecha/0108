@@ -174,7 +174,7 @@ nav ul li a:hover {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
-    animation: fadeIn 1s ease-in-out;
+    opacity: 0; /* 初期状態で透明にする */
 }
 
 .gallery-grid img {
