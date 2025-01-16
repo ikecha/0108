@@ -103,10 +103,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // 「はい」ボタンをクリックしたとき
     yesButton.addEventListener('click', () => {
         confirmationDialog.style.display = 'none';
+        startAnimations();
     });
 
     // 「いいえ」ボタンをクリックしたとき
     noButton.addEventListener('click', () => {
         window.location.href = 'https://www.google.com';
     });
+
+    function startAnimations() {
+        // ヒーローエリアのアニメーション
+        gsap.from(".title-image", { duration: 2, opacity: 0, scale: 0.5, ease: "bounce.out" });
+        gsap.from(".hero h1", { duration: 1, x: -200, opacity: 0, ease: "power2.out", delay: 0.5 });
+        gsap.from("nav ul li", {
+            duration: 1,
+            y: -50,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "back.out(1.7)",
+            delay: 1
+        });
+
+        // ギャラリー画像のアニメーション
+        gsap.to(".gallery-grid", { duration: 1.5, opacity: 1, ease: "power3.out" });
+        gsap.to(".gallery-item", {
+            duration: 1.5,
+            opacity: 1,
+            y: 0,
+            ease: "power3.out",
+            stagger: 0.3,
+            delay: 0.5
+        });
+    }
 });
