@@ -96,6 +96,7 @@ a:hover {
 .title-image {
     max-width: 100%;
     height: auto;
+    object-fit: contain; /* Ensure the image is contained within the bounding box */
     margin-bottom: 1rem;
 }
 
