@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function openModal(index) {
         currentImageIndex = index;
         modal.style.display = 'block';
+        modalImage.classList.remove('slideInFromRight', 'slideInFromLeft', 'fadeIn');  // アニメーションクラスをリセット
         modalImage.src = images[currentImageIndex].dataset.fullImage;  // フルサイズ画像をモーダルに表示
         modalImage.classList.add('fadeIn');
         setTimeout(() => modalImage.classList.remove('fadeIn'), 500);
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 次の画像を表示する関数
     function showNextImage() {
         const nextIndex = (currentImageIndex + 1) % totalImages;
+        modalImage.classList.remove('slideInFromRight', 'slideInFromLeft', 'fadeIn');  // アニメーションクラスをリセット
         modalImage.classList.add('slideInFromRight');
         setTimeout(() => {
             openModal(nextIndex);
@@ -58,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 前の画像を表示する関数
     function showPreviousImage() {
         const prevIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+        modalImage.classList.remove('slideInFromRight', 'slideInFromLeft', 'fadeIn');  // アニメーションクラスをリセット
         modalImage.classList.add('slideInFromLeft');
         setTimeout(() => {
             openModal(prevIndex);
